@@ -4,13 +4,70 @@ import {
   Layout, Box, Building2, Wrench, PenTool, Scissors, Sofa, MousePointer2,
   Video, Type, Award, Package, Gamepad2, Glasses, Car, HeartHandshake,
   Cuboid, Brush, Palette, Briefcase, Zap, X, Check,
-  MessageSquare, Users, Activity, User
+  MessageSquare, Users, Activity, User, Sun, Moon
 } from 'lucide-react';
 
 function App() {
+  /*
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'dark';
+  });
+  */
   const [activeTab, setActiveTab] = useState('for-you');
   const [selectedIndustry, setSelectedIndustry] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  
+  const [email, setEmail] = useState('');
+  const [submitStatus, setSubmitStatus] = useState('idle'); // idle, loading, success, error
+  const [waitlistCount, setWaitlistCount] = useState(() => {
+    const saved = localStorage.getItem('knot_waitlist_count');
+    return saved ? parseInt(saved, 10) : 264;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('knot_waitlist_count', waitlistCount.toString());
+  }, [waitlistCount]);
+
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxsCMoc5oeFVo3w27iUB0OggkWNoI9SwZ3S2f1AerK88S_a0K-bFO0hZSEy0dGetHDr5A/exec';
+
+  const handleWaitlistSubmit = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+    
+    setSubmitStatus('loading');
+    
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'text/plain',
+        },
+        body: JSON.stringify({
+          email: email,
+          discipline: selectedIndustry
+        })
+      });
+      
+      setSubmitStatus('success');
+      setEmail('');
+      setWaitlistCount(prev => prev + 1);
+    } catch (error) {
+      console.error('Error submitting waitlist:', error);
+      setSubmitStatus('error');
+    }
+  };
+  
+  /*
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
+  */
   
   const { scrollYProgress } = useScroll();
   const yParallax = useTransform(scrollYProgress, [0, 1], [0, -150]);
@@ -40,11 +97,11 @@ function App() {
       author: 'Elena Rostova',
       handle: '@erostova',
       time: '2h',
-      text: 'Exploring parametric facades for the new cultural center. The light play at golden hour completely changes our material choices. Moving away from standard glass.',
+      text: 'Testing parametric facades for a cultural center. The geometry looks interesting, but I\'m struggling to balance daylight performance with construction costs. How would you approach this?',
       mediaClass: 'mock-media-1',
       mediaTag: 'WIP - 02.obj',
       likes: 24,
-      comments: 4
+      comments: 42
     },
     {
       id: 2,
@@ -52,11 +109,11 @@ function App() {
       author: 'Marcus Chen',
       handle: '@marcus_ui',
       time: '5h',
-      text: 'Why does every B2B dashboard look the same? Working on a concept that brings editorial layouts into complex data tables. Here\'s a WIP of the density toggle.',
+      text: 'Why do most B2B dashboards feel the same? Exploring an editorial layout system that treats data like content. Sharing an early concept.',
       mediaClass: 'mock-media-2',
       mediaTag: 'Figma prototype',
       likes: 89,
-      comments: 12
+      comments: 87
     },
     {
       id: 3,
@@ -64,11 +121,11 @@ function App() {
       author: 'Sarah Jenkins',
       handle: '@sjenkins',
       time: '1d',
-      text: 'Struggling with the visual hierarchy on my thesis project. The data density is high, but reducing it feels like hiding important context. Anyone have good references for medical dashboards?',
+      text: 'Users understand the navigation in testing. But task completion still drops. At what point do you stop simplifying and start teaching?',
       mediaClass: null,
       mediaTag: null,
       likes: 12,
-      comments: 5
+      comments: 126
     }
   ];
 
@@ -128,6 +185,16 @@ function App() {
             <a href="#manifesto">Manifesto</a>
           </div>
           <div className="nav-actions">
+            {/* 
+            <button 
+              onClick={toggleTheme} 
+              className="btn btn-secondary btn-sm" 
+              style={{ width: '32px', padding: 0, borderRadius: '50%', background: 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', border: '1px solid var(--border-color)' }}
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
+            </button> 
+            */}
             <a href="#waitlist" className="btn btn-primary btn-sm">Join Waitlist</a>
           </div>
         </div>
@@ -144,17 +211,22 @@ function App() {
           >
             <motion.div variants={fadeUp} className="hero-badge">
               <span className="badge-dot"></span>
-              DesignVerse Private Beta
+              Private Beta
             </motion.div>
             <motion.h1 variants={fadeUp} className="hero-title">
-              The social network<br/>
-              for <span className="text-glow">design thinkers</span>.
+              See how great designers think.<br/>
+              <span className="text-glow">Not just what they ship.</span>
             </motion.h1>
             <motion.p variants={fadeUp} className="hero-subtitle">
-              Move beyond portfolios. Discover what top designers are thinking, debating, and exploring in real-time. The hub for process, not just pixels.
+              A network for designers to share ideas, seek feedback, and document their creative journey in public.
             </motion.p>
-            <motion.div variants={fadeUp} className="hero-cta">
+            <motion.div variants={fadeUp} className="hero-cta" style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
               <a href="#waitlist" className="btn btn-primary btn-lg">Join the Waitlist</a>
+              <a href="#manifesto" className="btn btn-secondary btn-lg" style={{ background: 'var(--glass-bg)', border: '1px solid var(--glass-border-hover)', color: 'var(--text-primary)', textDecoration: 'none', padding: '0 24px', display: 'inline-flex', alignItems: 'center', borderRadius: '8px', fontWeight: 500 }}>See the Conversation</a>
+            </motion.div>
+            <motion.div variants={fadeUp} className="waitlist-meta" style={{ marginTop: '32px' }}>
+              <span className="status-dot"></span>
+              {waitlistCount.toLocaleString()} designers on waitlist
             </motion.div>
           </motion.div>
 
@@ -249,9 +321,9 @@ function App() {
         >
           <div className="container flex-row">
             <motion.div variants={fadeUp} className="manifesto-content">
-              <h2 className="section-title">Ditch the polished portfolio.<br/>Share how you actually think.</h2>
-              <p className="text-muted mt-4 text-lg">
-                Most networks optimize for likes on finished pixels. We optimize for raw ideas, broken prototypes, and architectural debates. Join a community that values the messy process behind great design.
+              <h2 className="section-title">Design has places to share work.<br/>Design has places to build careers.</h2>
+              <p className="text-muted mt-4 text-lg" style={{ color: 'var(--text-glow)', fontWeight: 500 }}>
+                Where do designers discuss ideas?
               </p>
             </motion.div>
             <motion.div variants={fadeUp} className="manifesto-visual">
@@ -260,18 +332,18 @@ function App() {
                   <div className="compare-icon"><Palette size={18} /></div>
                   <div className="compare-body">
                     <span className="compare-title">Dribbble / Behance</span>
-                    <span className="compare-desc">Final pixels & hollow likes</span>
+                    <span className="compare-desc">Showcase finished work</span>
                   </div>
-                  <div className="compare-status"><X size={18} /></div>
+                  <div className="compare-status"><Check size={18} /></div>
                 </div>
                 
                 <div className="compare-row old-way">
                   <div className="compare-icon"><Briefcase size={18} /></div>
                   <div className="compare-body">
                     <span className="compare-title">LinkedIn</span>
-                    <span className="compare-desc">Recruiter spam & self-promotion</span>
+                    <span className="compare-desc">Build your professional network</span>
                   </div>
-                  <div className="compare-status"><X size={18} /></div>
+                  <div className="compare-status"><Check size={18} /></div>
                 </div>
 
                 <div className="compare-row new-way">
@@ -279,7 +351,7 @@ function App() {
                   <div className="compare-icon highlight"><Zap size={18} /></div>
                   <div className="compare-body">
                     <span className="compare-title highlight-text">DesignVerse</span>
-                    <span className="compare-desc text-white">Raw process, context, & learning</span>
+                    <span className="compare-desc text-white">Discuss ideas before they become products</span>
                   </div>
                   <div className="compare-status highlight"><Check size={18} /></div>
                 </div>
@@ -301,35 +373,68 @@ function App() {
             <div className="bento-grid">
               <motion.div variants={fadeUp} className="bento-item span-2">
                 <div className="bento-icon-wrapper">
+                  <div className="bento-icon"><PenTool size={22} /></div>
+                </div>
+                <h3>Design Journals</h3>
+                <p>Document your thinking, experiments, failures, and discoveries over time.</p>
+                <div className="bento-glow"></div>
+              </motion.div>
+              <motion.div variants={fadeUp} className="bento-item">
+                <div className="bento-icon-wrapper">
                   <div className="bento-icon"><MessageSquare size={22} /></div>
                 </div>
-                <h3>Meaningful Discourse</h3>
-                <p>Designed for thoughtful conversations. Less "Nice work bro", more "How did you solve the navigation constraints?"</p>
+                <h3>Critique Threads</h3>
+                <p>Get feedback before shipping instead of collecting likes after launch.</p>
                 <div className="bento-glow"></div>
               </motion.div>
               <motion.div variants={fadeUp} className="bento-item">
-                <div className="bento-icon-wrapper">
-                  <div className="bento-icon"><Users size={22} /></div>
-                </div>
-                <h3>Cross-Discipline</h3>
-                <p>Learn from architects, product designers, and creators outside your niche.</p>
-                <div className="bento-glow"></div>
-              </motion.div>
-              <motion.div variants={fadeUp} className="bento-item">
-                <div className="bento-icon-wrapper">
-                  <div className="bento-icon"><Activity size={22} /></div>
-                </div>
-                <h3>Real-time Pulse</h3>
-                <p>Follow emerging trends, debates, and innovations as they happen.</p>
-                <div className="bento-glow"></div>
-              </motion.div>
-              <motion.div variants={fadeUp} className="bento-item span-2">
                 <div className="bento-icon-wrapper">
                   <div className="bento-icon"><User size={22} /></div>
                 </div>
                 <h3>Living Profile</h3>
-                <p>Every post contributes to a living profile that shows how you think and reason, not just what you make.</p>
+                <p>Every discussion, insight, and contribution builds a profile that reflects how you think.</p>
                 <div className="bento-glow"></div>
+              </motion.div>
+              <motion.div variants={fadeUp} className="bento-item span-2">
+                <div className="bento-icon-wrapper">
+                  <div className="bento-icon"><Users size={22} /></div>
+                </div>
+                <h3>Cross-Discipline Discovery</h3>
+                <p>Learn from architects, product designers, industrial designers, artists, and creators outside your niche.</p>
+                <div className="bento-glow"></div>
+              </motion.div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Social Proof */}
+        <motion.section 
+          className="testimonials border-t"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+        >
+          <div className="container">
+            <motion.h2 variants={fadeUp} className="section-title text-center" style={{ marginBottom: '3rem' }}>Why Designers Are Joining</motion.h2>
+            <div className="bento-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+              <motion.div variants={fadeUp} className="bento-item" style={{ display: 'flex', flexDirection: 'column' }}>
+                <p style={{ fontStyle: 'italic', marginBottom: '1.5rem', flexGrow: 1, fontSize: '1.1rem', lineHeight: 1.6 }}>"I learn more from unfinished work than polished portfolios."</p>
+                <div className="text-muted" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                   — Product Designer
+                </div>
+              </motion.div>
+              <motion.div variants={fadeUp} className="bento-item" style={{ display: 'flex', flexDirection: 'column' }}>
+                <p style={{ fontStyle: 'italic', marginBottom: '1.5rem', flexGrow: 1, fontSize: '1.1rem', lineHeight: 1.6 }}>"I want to see how people arrive at decisions, not just the final screen."</p>
+                <div className="text-muted" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                   — UX Designer
+                </div>
+              </motion.div>
+              <motion.div variants={fadeUp} className="bento-item" style={{ display: 'flex', flexDirection: 'column' }}>
+                <p style={{ fontStyle: 'italic', marginBottom: '1.5rem', flexGrow: 1, fontSize: '1.1rem', lineHeight: 1.6 }}>"Finally a place for design discussions instead of self-promotion."</p>
+                <div className="text-muted" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                   — Architect
+                </div>
               </motion.div>
             </div>
           </div>
@@ -347,50 +452,77 @@ function App() {
           <motion.div variants={fadeUp} className="container text-center max-w-sm">
             <h2 className="section-title">Join the Private Beta</h2>
             <p className="text-muted mt-4 mb-8">
-              We're slowly rolling out invites to early supporters. Reserve your spot today to secure your handle.
+              Secure your username and get early access to the private beta.
             </p>
             <div className="waitlist-card">
-              <form className="waitlist-form" onSubmit={(e) => e.preventDefault()}>
-                <input type="text" placeholder="Full Name" required />
-                <input type="email" placeholder="Email Address" required />
-                
-                <div className="custom-select-wrapper">
-                  <div 
-                    className={`custom-select-trigger ${isDropdownOpen ? 'open' : ''}`}
-                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  >
-                    {selectedIndustry ? selectedIndustry : <span className="placeholder">Select Design Industry...</span>}
-                    <svg className="select-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              {submitStatus === 'success' ? (
+                <div style={{ padding: '2rem 1rem', textAlign: 'center' }}>
+                  <div style={{ width: '48px', height: '48px', background: 'rgba(34, 197, 94, 0.1)', color: '#22c55e', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                    <Check size={24} />
                   </div>
-                  
-                  {isDropdownOpen && (
-                    <>
-                      <div className="dropdown-overlay" onClick={() => setIsDropdownOpen(false)}></div>
-                      <div className="custom-select-menu">
-                        {designFields.map((field, idx) => (
-                          <div 
-                            key={idx} 
-                            className="custom-select-option"
-                            onClick={() => {
-                              setSelectedIndustry(field.name);
-                              setIsDropdownOpen(false);
-                            }}
-                          >
-                            <span style={{ display: 'flex', opacity: 0.6, marginRight: '8px' }}>{field.icon}</span>
-                            {field.name}
-                          </div>
-                        ))}
-                      </div>
-                    </>
-                  )}
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '8px', color: 'var(--text-primary)' }}>You're on the list.</h3>
+                  <p style={{ color: 'var(--text-muted)' }}>We'll notify you when Knot launches.</p>
                 </div>
+              ) : (
+                <form className="waitlist-form" onSubmit={handleWaitlistSubmit}>
+                  <input 
+                    type="email" 
+                    placeholder="Email Address" 
+                    required 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={submitStatus === 'loading'}
+                  />
+                  
+                  <div className="custom-select-wrapper">
+                    <div 
+                      className={`custom-select-trigger ${isDropdownOpen ? 'open' : ''}`}
+                      onClick={() => !submitStatus.includes('loading') && setIsDropdownOpen(!isDropdownOpen)}
+                      style={{ opacity: submitStatus === 'loading' ? 0.6 : 1, cursor: submitStatus === 'loading' ? 'not-allowed' : 'pointer' }}
+                    >
+                      {selectedIndustry ? selectedIndustry : <span className="placeholder">Select Design Industry...</span>}
+                      <svg className="select-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    
+                    {isDropdownOpen && (
+                      <>
+                        <div className="dropdown-overlay" onClick={() => setIsDropdownOpen(false)}></div>
+                        <div className="custom-select-menu">
+                          {designFields.map((field, idx) => (
+                            <div 
+                              key={idx} 
+                              className="custom-select-option"
+                              onClick={() => {
+                                setSelectedIndustry(field.name);
+                                setIsDropdownOpen(false);
+                              }}
+                            >
+                              <span style={{ display: 'flex', opacity: 0.6, marginRight: '8px' }}>{field.icon}</span>
+                              {field.name}
+                            </div>
+                          ))}
+                        </div>
+                      </>
+                    )}
+                  </div>
 
-                <button type="submit" className="btn btn-primary btn-lg" style={{ width: '100%', marginTop: '8px', borderRadius: '8px' }}>Reserve Spot</button>
-              </form>
+                  <button 
+                    type="submit" 
+                    className="btn btn-primary btn-lg" 
+                    style={{ width: '100%', marginTop: '8px', borderRadius: '8px', opacity: submitStatus === 'loading' ? 0.7 : 1 }}
+                    disabled={submitStatus === 'loading'}
+                  >
+                    {submitStatus === 'loading' ? 'Joining...' : 'Reserve My Spot'}
+                  </button>
+                  {submitStatus === 'error' && (
+                    <p style={{ color: '#ef4444', fontSize: '13px', marginTop: '8px', textAlign: 'center' }}>Something went wrong. Please try again.</p>
+                  )}
+                </form>
+              )}
             </div>
             <div className="waitlist-meta">
               <span className="status-dot"></span>
-              4,208 designers on waitlist
+              {waitlistCount.toLocaleString()} designers on waitlist
             </div>
           </motion.div>
         </motion.section>
@@ -399,16 +531,19 @@ function App() {
       {/* Footer */}
       <footer className="footer">
         <div className="container">
-          <div className="footer-top">
-            <div className="logo">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 22h20L12 2z"/></svg>
-              DesignVerse
+          <div className="footer-top" style={{ flexWrap: 'wrap', gap: '2rem' }}>
+            <div style={{ flex: '1 1 300px' }}>
+              <div className="logo" style={{ marginBottom: '8px' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 22h20L12 2z"/></svg>
+                Knot
+              </div>
+              <div className="text-muted" style={{ fontSize: '14px' }}>Where creative ideas connect.</div>
             </div>
-            <div className="footer-links">
+            <div className="footer-links" style={{ flex: '1 1 auto', justifyContent: 'flex-start' }}>
               <a href="#">About</a>
-              <a href="#">Terms</a>
+              <a href="#">Twitter/X</a>
               <a href="#">Privacy</a>
-              <a href="#">Twitter</a>
+              <a href="#">Contact</a>
             </div>
           </div>
         </div>
