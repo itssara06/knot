@@ -217,25 +217,26 @@ function App() {
             </motion.div>
           </motion.div>
 
-          {/* Scrolling Marquee */}
-          <div className="scrolling-marquee">
-            <div className="marquee-content">
-              {designFields.map((field, idx) => (
-                <div className="marquee-pill" key={`field-1-${idx}`}>
-                  <span style={{ display: 'flex', opacity: 0.6, marginRight: '8px' }}>{field.icon}</span>
-                  {field.name}
-                </div>
-              ))}
-              {/* Duplicate for infinite scroll loop */}
-              {designFields.map((field, idx) => (
-                <div className="marquee-pill" key={`field-2-${idx}`}>
-                  <span style={{ display: 'flex', opacity: 0.6, marginRight: '8px' }}>{field.icon}</span>
-                  {field.name}
-                </div>
-              ))}
-            </div>
-          </div>
         </section>
+
+        {/* Scrolling Marquee */}
+        <div className="scrolling-marquee">
+          <div className="marquee-content">
+            {designFields.map((field, idx) => (
+              <div className="marquee-pill" key={`field-1-${idx}`}>
+                <span style={{ display: 'flex', opacity: 0.6, marginRight: '8px' }}>{field.icon}</span>
+                {field.name}
+              </div>
+            ))}
+            {/* Duplicate for infinite scroll loop */}
+            {designFields.map((field, idx) => (
+              <div className="marquee-pill" key={`field-2-${idx}`}>
+                <span style={{ display: 'flex', opacity: 0.6, marginRight: '8px' }}>{field.icon}</span>
+                {field.name}
+              </div>
+            ))}
+          </div>
+        </div>
 
         {/* Manifesto / Comparison */}
         <motion.section 
