@@ -135,7 +135,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section-title {
-  font-size: 2.5rem;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
 }
 
 /* Background Effects */
@@ -379,7 +379,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-title {
-  font-size: 4rem;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
   margin-bottom: 24px;
 }
 
@@ -730,15 +730,6 @@ h1, h2, h3, h4, h5, h6 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-}
-
-@media (max-width: 768px) {
-  .bento-grid {
-    grid-template-columns: 1fr;
-  }
-  .bento-item.span-2 {
-    grid-column: span 1;
-  }
 }
 
 .bento-item {
@@ -1132,89 +1123,45 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 768px) {
-  /* Navigation */
-  .nav-links { display: none; }
-  
   /* Layout Paddings */
-  .hero { padding: 60px 0 20px; }
-  .features { padding: 40px 0; }
-  .cta-section { padding: 40px 0; }
+  .container { padding: 0 16px; }
+  .hero { padding: 40px 0 10px; }
+  .features, .manifesto, .testimonials, .cta-section { padding: 32px 0; }
   
-  /* Typography Scaling */
-  .hero-title { font-size: 2.25rem; line-height: 1.15; }
-  .hero-subtitle { font-size: 1.05rem; padding: 0 16px; margin: 16px auto; }
-  .section-title { font-size: 2rem; }
+  /* Navigation */
+  .nav-links, .nav-actions { display: none; }
   
-  /* Hero CTA Stacking */
-  .hero-cta { 
-    display: flex; 
-    flex-direction: column; 
+  /* Hero & Headings */
+  .hero-cta { flex-direction: column; width: 100%; gap: 12px; }
+  .hero-cta .btn { width: 100%; height: 50px; font-size: 16px; }
+  
+  /* Visuals & Grids */
+  .bento-grid { 
+    grid-template-columns: 1fr; 
     gap: 16px; 
-    padding: 0 24px; 
   }
-  .hero-cta .btn {
-    width: 100%;
-    min-height: 52px;
-    font-size: 16px;
-  }
+  .bento-item { grid-column: 1 / -1 !important; padding: 20px; }
   
-  /* Images and Visuals */
-  .hero-visual { margin-top: 32px; padding: 0 16px; }
-  .app-mockup { border-radius: 8px; }
+  .flex-row { flex-direction: column; gap: 24px; text-align: center; }
   
-  /* Tabs Scroll */
+  /* Posts & Cards */
   .app-tabs { 
     overflow-x: auto; 
     white-space: nowrap; 
     scrollbar-width: none; 
-    -ms-overflow-style: none;
-    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
   }
   .app-tabs::-webkit-scrollbar { display: none; }
+  .post-media { height: 160px; }
   
-  /* Posts & Cards */
-  .post { padding: 16px; margin: 0 8px; }
-  .post-media { height: 180px; }
+  /* Waitlist Form */
+  .waitlist-card { margin: 0 12px; padding: 20px 16px; }
+  .waitlist-form { flex-direction: column; gap: 12px; }
+  .waitlist-form .btn { width: 100%; }
   
-  /* Bento Grid Stack */
-  .bento-grid { grid-template-columns: 1fr; gap: 16px; padding: 0 16px; }
-  .bento-item.span-2, .bento-item.span-3 { grid-column: span 1; }
-  .bento-item { padding: 24px; }
-  
-  /* Flex Rows */
-  .flex-row { flex-direction: column; text-align: center; gap: 32px; padding: 0 16px; }
-  .manifesto-visual { justify-content: center; width: 100%; margin-top: 0; }
-  
-  /* Scrolling Marquee */
-  .scrolling-marquee { margin: 40px 0; }
-  .scrolling-marquee::before, .scrolling-marquee::after { width: 40px; }
-  .marquee-pill { padding: 12px 20px; font-size: 13px; }
-  
-  /* Comparison Table tweaks */
-  .compare-row { padding: 12px 16px; gap: 12px; }
-  .compare-icon { width: 32px; height: 32px; }
-  .compare-title { font-size: 14px; }
-  .compare-desc { font-size: 12px; }
-
-  /* Waitlist Form Adjustments */
-  .waitlist-card { padding: 24px 16px; margin: 0 16px; border-radius: 12px; }
-  
-  /* Form touch targets & zoom prevention */
-  .waitlist-form input, 
-  .custom-select-trigger, 
-  .industry-select {
-    font-size: 16px !important;
-    min-height: 52px !important;
-  }
-  
-  .custom-select-option {
-    padding: 16px !important;
-    font-size: 16px !important;
-  }
-  
-  /* Footer */
-  .footer-top { flex-direction: column; gap: 24px; text-align: center; }
-  .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+  /* Marquee */
+  .scrolling-marquee { margin: 24px 0; }
+  .marquee-pill { padding: 10px 16px; font-size: 12px; }
 }
 
 

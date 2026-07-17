@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { CosmicParallaxBg } from "@/components/ui/parallax-cosmic-background";
+import emailjs from '@emailjs/browser';
 import {
   Layout, Box, Building2, Wrench, PenTool, Scissors, Sofa, MousePointer2,
   Video, Type, Award, Package, Gamepad2, Glasses, Car, HeartHandshake,
@@ -56,7 +57,20 @@ function App() {
     setSubmitStatus('loading');
     
     try {
-      await fetch(GOOGLE_SCRIPT_URL, {
+      const templateParams = {
+        user_email: email,
+        user_industry: selectedIndustry || 'Not specified',
+        timestamp: new Date().toLocaleString()
+      };
+
+      const emailPromise = emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+
+      const sheetPromise = fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: {
@@ -64,9 +78,12 @@ function App() {
         },
         body: JSON.stringify({
           email: email,
-          discipline: selectedIndustry
+          discipline: selectedIndustry || 'Not specified'
         })
       });
+
+      // Execute both concurrently
+      await Promise.allSettled([emailPromise, sheetPromise]);
       
       setSubmitStatus('success');
       setEmail('');
