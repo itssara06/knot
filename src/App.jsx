@@ -235,9 +235,8 @@ function App() {
               <span className="badge-dot"></span>
               Private Beta
             </motion.div>
-            <motion.h1 className="hero-title">
-              <motion.span variants={fadeUp} className="d-block">See how great designers think.</motion.span>
-              <motion.span variants={fadeUp} className="text-glow d-block mt-2">Not just what they ship.</motion.span>
+            <motion.h1 className="hero-title" style={{ fontWeight: 500 }}>
+              <motion.span variants={fadeUp}>See how great designers think. Not just what they ship.</motion.span>
             </motion.h1>
             <motion.p variants={fadeUp} className="hero-subtitle">
               A network for designers to share ideas, seek feedback, and document their creative journey in public.
