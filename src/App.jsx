@@ -602,12 +602,6 @@ function App() {
           <p>Where creative ideas connect</p>
         </div>
         
-        <div className="mobile-footer-social">
-          <a href="#">Twitter</a>
-          <a href="#">Github</a>
-          <a href="#">Dribbble</a>
-        </div>
-        
         <div className="mobile-footer-copy">
           © {new Date().getFullYear()} designVerse
         </div>
