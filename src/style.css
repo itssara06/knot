@@ -40,14 +40,14 @@
   --section-bg: #000000;
   
   /* Premium Gradients */
-  --highlight-gradient: linear-gradient(90deg, #8b5cf6, #3b82f6, #06b6d4, #8b5cf6); /* Purple/Blue Linear-esque */
-  --highlight-gradient-strong: linear-gradient(135deg, #8b5cf6, #3b82f6);
-  --new-way-bg: linear-gradient(145deg, rgba(139, 92, 246, 0.08) 0%, rgba(59, 130, 246, 0.02) 100%);
-  --new-way-shadow: 0 12px 40px rgba(139, 92, 246, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  --new-way-icon-color: #fff;
-  --new-way-icon-shadow: rgba(139, 92, 246, 0.5);
-  --new-way-icon-shadow-pulse1: rgba(139, 92, 246, 0.3);
-  --new-way-icon-shadow-pulse2: rgba(139, 92, 246, 0.8);
+  --highlight-gradient: linear-gradient(115deg, #fbc2eb 0%, #a6c1ee 25%, #c2e9fb 50%, #e0c3fc 75%, #fbc2eb 100%);
+  --highlight-gradient-strong: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+  --new-way-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+  --new-way-shadow: 0 12px 40px rgba(166, 193, 238, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  --new-way-icon-color: #111;
+  --new-way-icon-shadow: rgba(166, 193, 238, 0.6);
+  --new-way-icon-shadow-pulse1: rgba(166, 193, 238, 0.4);
+  --new-way-icon-shadow-pulse2: rgba(166, 193, 238, 0.8);
 }
 
 
