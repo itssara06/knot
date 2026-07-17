@@ -385,9 +385,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .text-glow {
-  background: var(--text-glow-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text-primary);
 }
 
 .hero-subtitle {
