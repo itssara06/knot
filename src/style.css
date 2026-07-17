@@ -620,7 +620,6 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .compare-row.old-way {
@@ -636,10 +635,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .compare-row.new-way {
-  background: var(--surface-hover);
-  border: 1px solid rgba(139, 92, 246, 0.4);
-  box-shadow: 0 12px 32px rgba(139, 92, 246, 0.15), inset 0 1px 1px rgba(255,255,255,0.1);
-  transform: scale(1.02);
+  background: var(--new-way-bg);
+  border: 1px solid transparent;
+  box-shadow: var(--new-way-shadow);
+  transform: scale(1.05);
   z-index: 2;
   position: relative;
 }
