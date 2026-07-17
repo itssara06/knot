@@ -596,16 +596,20 @@ function App() {
       </AnimatePresence>
 
       {/* Mobile Footer */}
-      <footer className="mobile-footer flex-col items-center justify-center py-16 px-6 border-t border-[var(--border-color)]">
-        <h2 className="text-2xl font-bold mb-2 uppercase tracking-[0.2em] text-[var(--text-primary)]">designVerse</h2>
-        <p className="text-[var(--text-muted)] text-xs mb-8 text-center uppercase tracking-widest">Where creative ideas connect</p>
-        <div className="flex gap-6 mb-8 text-[var(--text-muted)] text-sm tracking-wide uppercase">
+      <footer className="mobile-footer flex-col items-center justify-center pt-12 pb-10 px-6 border-t border-[var(--border-color)]">
+        <div className="flex flex-col items-center gap-3 mb-10">
+          <h2 className="text-2xl font-bold uppercase tracking-[0.2em] text-[var(--text-primary)]">designVerse</h2>
+          <p className="text-[var(--text-muted)] text-[10px] text-center uppercase tracking-[0.25em]">Where creative ideas connect</p>
+        </div>
+        
+        <div className="flex gap-8 mb-10 text-[var(--text-muted)] text-xs font-medium tracking-[0.1em] uppercase">
           <a href="#" className="hover:text-[var(--text-primary)] transition-colors">Twitter</a>
           <a href="#" className="hover:text-[var(--text-primary)] transition-colors">Github</a>
           <a href="#" className="hover:text-[var(--text-primary)] transition-colors">Dribbble</a>
         </div>
-        <div className="text-[var(--text-muted)] text-xs opacity-60">
-          © {new Date().getFullYear()} designVerse. All rights reserved.
+        
+        <div className="text-[var(--text-muted)] text-[10px] opacity-40 uppercase tracking-widest">
+          © {new Date().getFullYear()} designVerse
         </div>
       </footer>
 
