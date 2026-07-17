@@ -41,43 +41,6 @@
 }
 
 
-[data-theme='light'] {
-  --bg-color: #f9fafb;
-  --surface-color: #ffffff;
-  --surface-hover: #f3f4f6;
-  --border-color: #e5e7eb;
-  --border-hover: #d1d5db;
-  
-  --text-primary: #111827;
-  --text-muted: #6b7280;
-  
-  --accent-color: #000000;
-
-  --grid-color: rgba(0, 0, 0, 0.05);
-  --glow-subtle: rgba(0, 0, 0, 0.03);
-  --glow-medium: rgba(0, 0, 0, 0.06);
-  --glass-bg: rgba(255, 255, 255, 0.8);
-  --glass-bg-hover: rgba(255, 255, 255, 1);
-  --glass-border: rgba(0, 0, 0, 0.08);
-  --glass-border-hover: rgba(0, 0, 0, 0.15);
-  --shadow-base: rgba(0, 0, 0, 0.05);
-  --shadow-heavy: rgba(0, 0, 0, 0.1);
-  --bg-input: rgba(255, 255, 255, 0.8);
-  --dropdown-bg: #ffffff;
-  --navbar-bg: rgba(255, 255, 255, 0.85);
-  --section-bg: rgba(0, 0, 0, 0.02);
-  --text-glow-gradient: linear-gradient(to right, #2563eb, #0d9488, #0ea5e9);
-  
-  --highlight-gradient: linear-gradient(90deg, #2563eb, #0d9488, #0ea5e9, #0d9488, #2563eb);
-  --highlight-gradient-strong: linear-gradient(135deg, #2563eb, #0d9488);
-  --new-way-bg: linear-gradient(145deg, rgba(37, 99, 235, 0.05) 0%, rgba(13, 148, 136, 0.05) 100%);
-  --new-way-shadow: 0 12px 40px rgba(13, 148, 136, 0.15), inset 0 1px 0 rgba(37, 99, 235, 0.2);
-  --new-way-icon-color: #fff;
-  --new-way-icon-shadow: rgba(13, 148, 136, 0.4);
-  --new-way-icon-shadow-pulse1: rgba(13, 148, 136, 0.2);
-  --new-way-icon-shadow-pulse2: rgba(13, 148, 136, 0.6);
-}
-
 
 * {
   box-sizing: border-box;
@@ -118,24 +81,48 @@ a {
 }
 
 .text-center { text-align: center; }
+.text-left { text-align: left; }
 .text-muted { color: var(--text-muted); }
-.mt-4 { margin-top: 1rem; }
-.mb-8 { margin-bottom: 2rem; }
-.max-w-sm { max-width: 600px; margin-inline: auto; }
-.flex-row { display: flex; gap: 4rem; align-items: center; }
+.text-danger { color: #ef4444; }
+.d-block { display: block; }
+.font-italic { font-style: italic; }
+.font-semibold { font-weight: 600; }
+.mt-2 { margin-top: 8px; }
+.mt-4 { margin-top: 16px; }
+.mt-8 { margin-top: 32px; }
+.mb-2 { margin-bottom: 8px; }
+.mb-6 { margin-bottom: 24px; }
+.mb-8 { margin-bottom: 32px; }
+.mb-12 { margin-bottom: 48px; }
+.ml-2 { margin-left: 8px; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.w-full { width: 100%; }
+.flex-row { display: flex; align-items: center; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.gap-2 { gap: 8px; }
+.gap-4 { gap: 16px; }
+.rounded-full { border-radius: 50%; }
+.rounded-lg { border-radius: 8px; }
+.p-4 { padding: 16px; }
+.p-8 { padding: 32px; }
 .border-y { border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
 .border-t { border-top: 1px solid var(--border-color); }
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.03em;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-primary);
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 .section-title {
-  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
 }
 
 /* Background Effects */
@@ -180,6 +167,9 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.2s ease;
   cursor: pointer;
   border: 1px solid transparent;
+  height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
 }
 
 .btn-sm {
@@ -322,7 +312,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hero */
 .hero {
-  padding: 120px 0 80px;
+  padding: 120px 0;
 }
 
 .hero-badge {
@@ -380,7 +370,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1.05;
   margin-bottom: 24px;
 }
 
@@ -393,6 +386,8 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-muted);
   max-width: 540px;
   margin: 0 auto 40px;
+  line-height: 1.5;
+  font-weight: 400;
 }
 
 /* Mockup UI */
@@ -570,8 +565,8 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
 }
 
-/* Manifesto */
-.manifesto {
+/* Sections */
+.manifesto, .features, .waitlist-section {
   padding: 120px 0;
   background: var(--section-bg);
 }

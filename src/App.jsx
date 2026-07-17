@@ -10,11 +10,6 @@ import {
 } from 'lucide-react';
 
 function App() {
-  /*
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('theme') || 'dark';
-  });
-  */
   const [activeTab, setActiveTab] = useState('for-you');
   const [selectedIndustry, setSelectedIndustry] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -93,17 +88,6 @@ function App() {
       setSubmitStatus('error');
     }
   };
-  
-  /*
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
-  };
-  */
   
   const { scrollYProgress } = useScroll();
   const yParallax = useTransform(scrollYProgress, [0, 1], [0, -150]);
@@ -252,8 +236,8 @@ function App() {
               Private Beta
             </motion.div>
             <motion.h1 className="hero-title">
-              <motion.span variants={fadeUp} style={{ display: 'block' }}>See how great designers think.</motion.span>
-              <motion.span variants={fadeUp} className="text-glow" style={{ display: 'block', marginTop: '8px' }}>Not just what they ship.</motion.span>
+              <motion.span variants={fadeUp} className="d-block">See how great designers think.</motion.span>
+              <motion.span variants={fadeUp} className="text-glow d-block mt-2">Not just what they ship.</motion.span>
             </motion.h1>
             <motion.p variants={fadeUp} className="hero-subtitle">
               A network for designers to share ideas, seek feedback, and document their creative journey in public.
@@ -261,10 +245,10 @@ function App() {
             <motion.div variants={fadeUp} className="hero-cta">
               <a href="#waitlist" className="btn btn-primary btn-lg group" onClick={(e) => { e.preventDefault(); setIsWaitlistModalOpen(true); }}>
                 Join the Waitlist
-                <ArrowRight size={18} className="arrow-icon" style={{ marginLeft: '8px', transition: 'transform 0.3s ease' }} />
+                <ArrowRight size={18} className="arrow-icon ml-2" style={{ transition: 'transform 0.3s ease' }} />
               </a>
             </motion.div>
-            <motion.div variants={fadeUp} className="waitlist-meta" style={{ marginTop: '32px' }}>
+            <motion.div variants={fadeUp} className="waitlist-meta mt-8">
               <span className="status-dot"></span>
               {displayCount.toLocaleString()} designers on waitlist
             </motion.div>
@@ -276,7 +260,7 @@ function App() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <motion.div style={{ y: yParallax, width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <motion.div style={{ y: yParallax }} className="w-full flex-row justify-center">
             {/* Premium UI Mockup */}
             <div className="app-mockup">
               <div className="app-header">
@@ -363,11 +347,11 @@ function App() {
           variants={staggerContainer}
         >
           <div className="container flex-row">
-            <motion.div variants={fadeUp} className="manifesto-content text-left" style={{ textAlign: 'left' }}>
+            <motion.div variants={fadeUp} className="manifesto-content text-left">
               <h2 className="section-title">
                 Design has places to <span className="text-glow">share work</span> and <span className="text-glow">build careers</span>.
               </h2>
-              <p className="mt-4 text-lg" style={{ color: '#a6c1ee', fontWeight: 500, fontSize: '1.25rem', textAlign: 'left' }}>
+              <p className="mt-4 text-left hero-subtitle">
                 Where do designers discuss ideas?
               </p>
             </motion.div>
@@ -415,9 +399,9 @@ function App() {
           variants={staggerContainer}
         >
           <div className="container">
-            <motion.div variants={fadeUp} style={{ textAlign: 'center', marginBottom: '64px' }}>
+            <motion.div variants={fadeUp} className="text-center mb-12">
               <h2 className="section-title">Built for the design process.</h2>
-              <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', marginTop: '16px', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto' }}>
+              <p className="text-muted mt-4 mx-auto" style={{ fontSize: '1.1rem', maxWidth: '600px' }}>
                 Tools designed to help you share your thinking, not just your pixels.
               </p>
             </motion.div>
@@ -467,23 +451,23 @@ function App() {
           variants={staggerContainer}
         >
           <div className="container">
-            <motion.h2 variants={fadeUp} className="section-title text-center" style={{ marginBottom: '3rem' }}>Why Designers Are Joining</motion.h2>
-            <div className="bento-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
-              <motion.div variants={fadeUp} className="bento-item" style={{ display: 'flex', flexDirection: 'column' }}>
-                <p style={{ fontStyle: 'italic', marginBottom: '1.5rem', flexGrow: 1, fontSize: '1.1rem', lineHeight: 1.6 }}>"I learn more from unfinished work than polished portfolios."</p>
-                <div className="text-muted" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <motion.h2 variants={fadeUp} className="section-title text-center mb-12">Why Designers Are Joining</motion.h2>
+            <div className="bento-grid">
+              <motion.div variants={fadeUp} className="bento-item flex-col">
+                <p className="font-italic mb-6" style={{ flexGrow: 1, fontSize: '1.1rem', lineHeight: 1.6 }}>"I learn more from unfinished work than polished portfolios."</p>
+                <div className="text-muted flex-row gap-2">
                    — Product Designer
                 </div>
               </motion.div>
-              <motion.div variants={fadeUp} className="bento-item" style={{ display: 'flex', flexDirection: 'column' }}>
-                <p style={{ fontStyle: 'italic', marginBottom: '1.5rem', flexGrow: 1, fontSize: '1.1rem', lineHeight: 1.6 }}>"I want to see how people arrive at decisions, not just the final screen."</p>
-                <div className="text-muted" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <motion.div variants={fadeUp} className="bento-item flex-col">
+                <p className="font-italic mb-6" style={{ flexGrow: 1, fontSize: '1.1rem', lineHeight: 1.6 }}>"I want to see how people arrive at decisions, not just the final screen."</p>
+                <div className="text-muted flex-row gap-2">
                    — UX Designer
                 </div>
               </motion.div>
-              <motion.div variants={fadeUp} className="bento-item" style={{ display: 'flex', flexDirection: 'column' }}>
-                <p style={{ fontStyle: 'italic', marginBottom: '1.5rem', flexGrow: 1, fontSize: '1.1rem', lineHeight: 1.6 }}>"Finally a place for design discussions instead of self-promotion."</p>
-                <div className="text-muted" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <motion.div variants={fadeUp} className="bento-item flex-col">
+                <p className="font-italic mb-6" style={{ flexGrow: 1, fontSize: '1.1rem', lineHeight: 1.6 }}>"Finally a place for design discussions instead of self-promotion."</p>
+                <div className="text-muted flex-row gap-2">
                    — Architect
                 </div>
               </motion.div>
@@ -520,18 +504,18 @@ function App() {
               </button>
               
               <div className="text-center">
-                <h2 className="section-title" style={{ fontSize: '2rem' }}>Join the Private Beta</h2>
+                <h2 className="section-title">Join the Private Beta</h2>
                 <p className="text-muted mt-4 mb-8">
                   Secure your username and get early access to the private beta.
                 </p>
                 <div className="waitlist-card">
                   {submitStatus === 'success' ? (
-                    <div style={{ padding: '2rem 1rem', textAlign: 'center' }}>
-                      <div style={{ width: '48px', height: '48px', background: 'rgba(34, 197, 94, 0.1)', color: '#22c55e', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                    <div className="p-8 text-center">
+                      <div className="rounded-full flex-row items-center justify-center mx-auto mb-4" style={{ width: '48px', height: '48px', background: 'rgba(34, 197, 94, 0.1)', color: '#22c55e' }}>
                         <Check size={24} />
                       </div>
-                      <h3 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '8px', color: 'var(--text-primary)' }}>You're on the list.</h3>
-                      <p style={{ color: 'var(--text-muted)' }}>We'll notify you when Knot launches.</p>
+                      <h3 className="font-semibold mb-2" style={{ fontSize: '1.25rem' }}>You're on the list.</h3>
+                      <p className="text-muted">We'll notify you when Knot launches.</p>
                     </div>
                   ) : (
                     <form className="waitlist-form" onSubmit={handleWaitlistSubmit}>
@@ -567,7 +551,7 @@ function App() {
                                     setIsDropdownOpen(false);
                                   }}
                                 >
-                                  <span style={{ display: 'flex', opacity: 0.6, marginRight: '8px' }}>{field.icon}</span>
+                                  <span className="d-block mr-2 opacity-60">{field.icon}</span>
                                   {field.name}
                                 </div>
                               ))}
@@ -585,7 +569,7 @@ function App() {
                         {submitStatus === 'loading' ? 'Joining...' : 'Reserve My Spot'}
                       </button>
                       {submitStatus === 'error' && (
-                        <p style={{ color: '#ef4444', fontSize: '13px', marginTop: '8px', textAlign: 'center' }}>Something went wrong. Please try again.</p>
+                        <p className="text-danger text-center mt-2" style={{ fontSize: '13px' }}>Something went wrong. Please try again.</p>
                       )}
                     </form>
                   )}
