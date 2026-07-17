@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { CosmicParallaxBg } from "@/components/ui/parallax-cosmic-background";
 import {
   Layout, Box, Building2, Wrench, PenTool, Scissors, Sofa, MousePointer2,
   Video, Type, Award, Package, Gamepad2, Glasses, Car, HeartHandshake,
@@ -117,6 +118,7 @@ function App() {
       time: '2h',
       text: 'Testing parametric facades for a cultural center. The geometry looks interesting, but I\'m struggling to balance daylight performance with construction costs. How would you approach this?',
       mediaClass: 'mock-media-1',
+      mediaImage: '/post1.jpg',
       mediaTag: 'WIP - 02.obj',
       likes: 24,
       comments: 42
@@ -129,6 +131,7 @@ function App() {
       time: '5h',
       text: 'Why do most B2B dashboards feel the same? Exploring an editorial layout system that treats data like content. Sharing an early concept.',
       mediaClass: 'mock-media-2',
+      mediaImage: '/post2.jpg',
       mediaTag: 'Figma prototype',
       likes: 89,
       comments: 87
@@ -292,7 +295,10 @@ function App() {
                       <p className="post-text">{post.text}</p>
                       
                       {post.mediaClass && (
-                        <div className={`post-media ${post.mediaClass}`}>
+                        <div 
+                          className={`post-media ${post.mediaClass}`} 
+                          style={post.mediaImage ? { backgroundImage: `url(${post.mediaImage})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
+                        >
                           <div className="media-tag">{post.mediaTag}</div>
                         </div>
                       )}
@@ -333,7 +339,7 @@ function App() {
         {/* Manifesto / Comparison */}
         <motion.section 
           id="manifesto" 
-          className="manifesto border-y"
+          className="manifesto"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
@@ -432,7 +438,7 @@ function App() {
 
         {/* Social Proof */}
         <motion.section 
-          className="testimonials border-t"
+          className="testimonials"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
@@ -573,18 +579,13 @@ function App() {
       </AnimatePresence>
 
       {/* Footer */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-top" style={{ flexWrap: 'wrap', gap: '2rem' }}>
-            <div style={{ flex: '1 1 300px' }}>
-              <div className="logo" style={{ marginBottom: '8px' }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 22h20L12 2z"/></svg>
-                Knot
-              </div>
-              <div className="text-muted" style={{ fontSize: '14px' }}>Where creative ideas connect.</div>
-            </div>
-
-          </div>
+      <footer className="relative w-full h-[100vh] min-h-[600px] flex flex-col justify-center items-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <CosmicParallaxBg 
+            head="designVerse" 
+            text="Where creative ideas connect" 
+            loop={true}
+          />
         </div>
       </footer>
     </>
