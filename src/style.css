@@ -273,13 +273,19 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Navbar */
 .navbar {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   height: 56px;
   background: var(--navbar-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-color);
-  z-index: 100;
+  z-index: 1000;
+}
+
+main {
+  padding-top: 56px;
 }
 
 .nav-container {
