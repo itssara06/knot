@@ -346,11 +346,11 @@ function App() {
           variants={staggerContainer}
         >
           <div className="container flex-row">
-            <motion.div variants={fadeUp} className="manifesto-content text-left">
+            <motion.div variants={fadeUp} className="manifesto-content">
               <h2 className="section-title" style={{ fontWeight: 500, textWrap: 'balance' }}>
                 Design has places to <span className="text-glow">share work</span> and <span className="text-glow">build careers</span>.
               </h2>
-              <p className="mt-4 text-left hero-subtitle text-highlight" style={{ fontSize: '1.25rem' }}>
+              <p className="mt-4 hero-subtitle text-highlight" style={{ fontSize: '1.25rem' }}>
                 Where do designers discuss ideas?
               </p>
             </motion.div>
