@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import { CosmicParallaxBg } from "@/components/ui/parallax-cosmic-background";
 import emailjs from '@emailjs/browser';
 import {
@@ -19,6 +19,17 @@ function App() {
   const [selectedIndustry, setSelectedIndustry] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isWaitlistModalOpen, setIsWaitlistModalOpen] = useState(false);
+  const [navVisible, setNavVisible] = useState(true);
+  
+  const { scrollY } = useScroll();
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious();
+    if (latest > previous && latest > 150) {
+      setNavVisible(false);
+    } else {
+      setNavVisible(true);
+    }
+  });
   
   const [email, setEmail] = useState('');
   const [submitStatus, setSubmitStatus] = useState('idle'); // idle, loading, success, error
@@ -210,8 +221,8 @@ function App() {
       <motion.nav 
         className="navbar"
         initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
+        animate={{ y: navVisible ? 0 : -100, opacity: navVisible ? 1 : 0 }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
       >
         <div className="nav-container">
           <a href="#" className="logo">
