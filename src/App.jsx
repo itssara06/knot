@@ -350,7 +350,7 @@ function App() {
               <h2 className="section-title">
                 Design has places to <span className="text-glow">share work</span> and <span className="text-glow">build careers</span>.
               </h2>
-              <p className="mt-4 text-left hero-subtitle">
+              <p className="mt-4 text-left hero-subtitle text-highlight" style={{ fontSize: '1.25rem' }}>
                 Where do designers discuss ideas?
               </p>
             </motion.div>

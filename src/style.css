@@ -381,6 +381,15 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
 }
 
+.text-highlight {
+  background: var(--highlight-gradient);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: meshGradient 6s linear infinite;
+  font-weight: 500;
+}
+
 .hero-subtitle {
   font-size: 1.1rem;
   color: var(--text-muted);
