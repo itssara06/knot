@@ -1154,10 +1154,12 @@ h1, h2, h3, h4, h5, h6 {
   .app-tabs::-webkit-scrollbar { display: none; }
   .post-media { height: 160px; }
   
-  /* Waitlist Form */
+  /* Waitlist Form & Modal */
   .waitlist-card { margin: 0 12px; padding: 20px 16px; }
   .waitlist-form { flex-direction: column; gap: 12px; }
   .waitlist-form .btn { width: 100%; }
+  .modal-overlay { padding: 16px; }
+  .modal-content { padding: 32px 20px; }
   
   /* Marquee */
   .scrolling-marquee { margin: 24px 0; }
