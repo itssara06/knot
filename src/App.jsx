@@ -415,6 +415,12 @@ function App() {
           variants={staggerContainer}
         >
           <div className="container">
+            <motion.div variants={fadeUp} style={{ textAlign: 'center', marginBottom: '64px' }}>
+              <h2 className="section-title">Built for the design process.</h2>
+              <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', marginTop: '16px', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto' }}>
+                Tools designed to help you share your thinking, not just your pixels.
+              </p>
+            </motion.div>
             <div className="bento-grid">
               <motion.div variants={fadeUp} className="bento-item span-2">
                 <div className="bento-icon-wrapper">
