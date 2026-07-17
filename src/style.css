@@ -1046,10 +1046,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Scrolling Marquee */
 .scrolling-marquee {
-  width: 100vw;
+  width: 100%;
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
   overflow: hidden;
   margin-top: 80px;
   margin-bottom: 80px;
