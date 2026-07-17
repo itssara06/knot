@@ -595,8 +595,22 @@ function App() {
         )}
       </AnimatePresence>
 
-      {/* Footer */}
-      <footer className="relative w-full h-[100vh] min-h-[600px] flex flex-col justify-center items-center overflow-hidden">
+      {/* Mobile Footer */}
+      <footer className="flex md:hidden flex-col items-center justify-center py-16 px-6 border-t border-[var(--border-color)]">
+        <h2 className="text-2xl font-bold mb-2 uppercase tracking-[0.2em] text-[var(--text-primary)]">designVerse</h2>
+        <p className="text-[var(--text-muted)] text-xs mb-8 text-center uppercase tracking-widest">Where creative ideas connect</p>
+        <div className="flex gap-6 mb-8 text-[var(--text-muted)]">
+          <a href="#" aria-label="Twitter"><Twitter size={20} /></a>
+          <a href="#" aria-label="Github"><Github size={20} /></a>
+          <a href="#" aria-label="Dribbble"><Dribbble size={20} /></a>
+        </div>
+        <div className="text-[var(--text-muted)] text-xs opacity-60">
+          © {new Date().getFullYear()} designVerse. All rights reserved.
+        </div>
+      </footer>
+
+      {/* Desktop Footer (Cosmic Parallax) */}
+      <footer className="hidden md:flex relative w-full h-[100vh] min-h-[600px] flex-col justify-center items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <CosmicParallaxBg 
             head="designVerse" 
