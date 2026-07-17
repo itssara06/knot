@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import {
   Layout, Box, Building2, Wrench, PenTool, Scissors, Sofa, MousePointer2,
   Video, Type, Award, Package, Gamepad2, Glasses, Car, HeartHandshake,
@@ -16,6 +16,7 @@ function App() {
   const [activeTab, setActiveTab] = useState('for-you');
   const [selectedIndustry, setSelectedIndustry] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isWaitlistModalOpen, setIsWaitlistModalOpen] = useState(false);
   
   const [email, setEmail] = useState('');
   const [submitStatus, setSubmitStatus] = useState('idle'); // idle, loading, success, error
@@ -212,7 +213,7 @@ function App() {
               {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
             </button> 
             */}
-            <a href="#waitlist" className="btn btn-primary btn-sm">Join Waitlist</a>
+            <a href="#waitlist" className="btn btn-primary btn-sm" onClick={(e) => { e.preventDefault(); setIsWaitlistModalOpen(true); }}>Join Waitlist</a>
           </div>
         </div>
       </motion.nav>
@@ -230,15 +231,15 @@ function App() {
               <span className="badge-dot"></span>
               Private Beta
             </motion.div>
-            <motion.h1 className="hero-title" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <motion.span variants={fadeUp}>See how great designers think.</motion.span>
-              <motion.span variants={fadeUp} className="text-glow">Not just what they ship.</motion.span>
+            <motion.h1 className="hero-title">
+              <motion.span variants={fadeUp} style={{ display: 'block' }}>See how great designers think.</motion.span>
+              <motion.span variants={fadeUp} className="text-glow" style={{ display: 'block', marginTop: '8px' }}>Not just what they ship.</motion.span>
             </motion.h1>
             <motion.p variants={fadeUp} className="hero-subtitle">
               A network for designers to share ideas, seek feedback, and document their creative journey in public.
             </motion.p>
             <motion.div variants={fadeUp} className="hero-cta">
-              <a href="#waitlist" className="btn btn-primary btn-lg group">
+              <a href="#waitlist" className="btn btn-primary btn-lg group" onClick={(e) => { e.preventDefault(); setIsWaitlistModalOpen(true); }}>
                 Join the Waitlist
                 <ArrowRight size={18} className="arrow-icon" style={{ marginLeft: '8px', transition: 'transform 0.3s ease' }} />
               </a>
@@ -340,8 +341,11 @@ function App() {
         >
           <div className="container flex-row">
             <motion.div variants={fadeUp} className="manifesto-content">
-              <h2 className="section-title">Design has places to share work.<br/>Design has places to build careers.</h2>
-              <p className="text-muted mt-4 text-lg" style={{ color: 'var(--text-glow)', fontWeight: 500 }}>
+              <h2 className="section-title">
+                Design has places to <span className="text-glow">share work</span>.<br/>
+                Design has places to <span className="text-glow">build careers</span>.
+              </h2>
+              <p className="mt-4 text-lg" style={{ color: '#a6c1ee', fontWeight: 500, fontSize: '1.25rem' }}>
                 Where do designers discuss ideas?
               </p>
             </motion.div>
@@ -459,93 +463,114 @@ function App() {
           </div>
         </motion.section>
 
-        {/* Waitlist Section */}
-        <motion.section 
-          id="waitlist" 
-          className="cta-section border-t"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
-        >
-          <motion.div variants={fadeUp} className="container text-center max-w-sm">
-            <h2 className="section-title">Join the Private Beta</h2>
-            <p className="text-muted mt-4 mb-8">
-              Secure your username and get early access to the private beta.
-            </p>
-            <div className="waitlist-card">
-              {submitStatus === 'success' ? (
-                <div style={{ padding: '2rem 1rem', textAlign: 'center' }}>
-                  <div style={{ width: '48px', height: '48px', background: 'rgba(34, 197, 94, 0.1)', color: '#22c55e', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
-                    <Check size={24} />
-                  </div>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '8px', color: 'var(--text-primary)' }}>You're on the list.</h3>
-                  <p style={{ color: 'var(--text-muted)' }}>We'll notify you when Knot launches.</p>
-                </div>
-              ) : (
-                <form className="waitlist-form" onSubmit={handleWaitlistSubmit}>
-                  <input 
-                    type="email" 
-                    placeholder="Email Address" 
-                    required 
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    disabled={submitStatus === 'loading'}
-                  />
-                  
-                  <div className="custom-select-wrapper">
-                    <div 
-                      className={`custom-select-trigger ${isDropdownOpen ? 'open' : ''}`}
-                      onClick={() => !submitStatus.includes('loading') && setIsDropdownOpen(!isDropdownOpen)}
-                      style={{ opacity: submitStatus === 'loading' ? 0.6 : 1, cursor: submitStatus === 'loading' ? 'not-allowed' : 'pointer' }}
-                    >
-                      {selectedIndustry ? selectedIndustry : <span className="placeholder">Select Design Industry...</span>}
-                      <svg className="select-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </div>
-                    
-                    {isDropdownOpen && (
-                      <>
-                        <div className="dropdown-overlay" onClick={() => setIsDropdownOpen(false)}></div>
-                        <div className="custom-select-menu">
-                          {designFields.map((field, idx) => (
-                            <div 
-                              key={idx} 
-                              className="custom-select-option"
-                              onClick={() => {
-                                setSelectedIndustry(field.name);
-                                setIsDropdownOpen(false);
-                              }}
-                            >
-                              <span style={{ display: 'flex', opacity: 0.6, marginRight: '8px' }}>{field.icon}</span>
-                              {field.name}
-                            </div>
-                          ))}
-                        </div>
-                      </>
-                    )}
-                  </div>
-
-                  <button 
-                    type="submit" 
-                    className="btn btn-primary btn-lg" 
-                    style={{ width: '100%', marginTop: '8px', borderRadius: '8px', opacity: submitStatus === 'loading' ? 0.7 : 1 }}
-                    disabled={submitStatus === 'loading'}
-                  >
-                    {submitStatus === 'loading' ? 'Joining...' : 'Reserve My Spot'}
-                  </button>
-                  {submitStatus === 'error' && (
-                    <p style={{ color: '#ef4444', fontSize: '13px', marginTop: '8px', textAlign: 'center' }}>Something went wrong. Please try again.</p>
-                  )}
-                </form>
-              )}
-            </div>
-            <div className="waitlist-meta">
-              <span className="status-dot"></span>
-              {waitlistCount.toLocaleString()} designers on waitlist
-            </div>
-          </motion.div>
-        </motion.section>
       </main>
+
+      {/* Waitlist Modal */}
+      <AnimatePresence>
+        {isWaitlistModalOpen && (
+          <motion.div 
+            className="modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsWaitlistModalOpen(false)}
+          >
+            <motion.div 
+              className="modal-content"
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                className="modal-close"
+                onClick={() => setIsWaitlistModalOpen(false)}
+                aria-label="Close modal"
+              >
+                <X size={24} />
+              </button>
+              
+              <div className="text-center">
+                <h2 className="section-title" style={{ fontSize: '2rem' }}>Join the Private Beta</h2>
+                <p className="text-muted mt-4 mb-8">
+                  Secure your username and get early access to the private beta.
+                </p>
+                <div className="waitlist-card">
+                  {submitStatus === 'success' ? (
+                    <div style={{ padding: '2rem 1rem', textAlign: 'center' }}>
+                      <div style={{ width: '48px', height: '48px', background: 'rgba(34, 197, 94, 0.1)', color: '#22c55e', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                        <Check size={24} />
+                      </div>
+                      <h3 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '8px', color: 'var(--text-primary)' }}>You're on the list.</h3>
+                      <p style={{ color: 'var(--text-muted)' }}>We'll notify you when Knot launches.</p>
+                    </div>
+                  ) : (
+                    <form className="waitlist-form" onSubmit={handleWaitlistSubmit}>
+                      <input 
+                        type="email" 
+                        placeholder="Email Address" 
+                        required 
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        disabled={submitStatus === 'loading'}
+                      />
+                      
+                      <div className="custom-select-wrapper">
+                        <div 
+                          className={`custom-select-trigger ${isDropdownOpen ? 'open' : ''}`}
+                          onClick={() => !submitStatus.includes('loading') && setIsDropdownOpen(!isDropdownOpen)}
+                          style={{ opacity: submitStatus === 'loading' ? 0.6 : 1, cursor: submitStatus === 'loading' ? 'not-allowed' : 'pointer' }}
+                        >
+                          {selectedIndustry ? selectedIndustry : <span className="placeholder">Select Design Industry...</span>}
+                          <svg className="select-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                        
+                        {isDropdownOpen && (
+                          <>
+                            <div className="dropdown-overlay" onClick={() => setIsDropdownOpen(false)}></div>
+                            <div className="custom-select-menu">
+                              {designFields.map((field, idx) => (
+                                <div 
+                                  key={idx} 
+                                  className="custom-select-option"
+                                  onClick={() => {
+                                    setSelectedIndustry(field.name);
+                                    setIsDropdownOpen(false);
+                                  }}
+                                >
+                                  <span style={{ display: 'flex', opacity: 0.6, marginRight: '8px' }}>{field.icon}</span>
+                                  {field.name}
+                                </div>
+                              ))}
+                            </div>
+                          </>
+                        )}
+                      </div>
+
+                      <button 
+                        type="submit" 
+                        className="btn btn-primary btn-lg" 
+                        style={{ width: '100%', marginTop: '8px', borderRadius: '8px', opacity: submitStatus === 'loading' ? 0.7 : 1 }}
+                        disabled={submitStatus === 'loading'}
+                      >
+                        {submitStatus === 'loading' ? 'Joining...' : 'Reserve My Spot'}
+                      </button>
+                      {submitStatus === 'error' && (
+                        <p style={{ color: '#ef4444', fontSize: '13px', marginTop: '8px', textAlign: 'center' }}>Something went wrong. Please try again.</p>
+                      )}
+                    </form>
+                  )}
+                </div>
+                <div className="waitlist-meta">
+                  <span className="status-dot"></span>
+                  {waitlistCount.toLocaleString()} designers on waitlist
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Footer */}
       <footer className="footer">
@@ -558,12 +583,7 @@ function App() {
               </div>
               <div className="text-muted" style={{ fontSize: '14px' }}>Where creative ideas connect.</div>
             </div>
-            <div className="footer-links" style={{ flex: '1 1 auto', justifyContent: 'flex-start' }}>
-              <a href="#">About</a>
-              <a href="#">Twitter/X</a>
-              <a href="#">Privacy</a>
-              <a href="#">Contact</a>
-            </div>
+
           </div>
         </div>
       </footer>
