@@ -347,7 +347,7 @@ function App() {
         >
           <div className="container flex-row">
             <motion.div variants={fadeUp} className="manifesto-content text-left">
-              <h2 className="section-title">
+              <h2 className="section-title" style={{ fontWeight: 500 }}>
                 Design has places to <span className="text-glow">share work</span> and <span className="text-glow">build careers</span>.
               </h2>
               <p className="mt-4 text-left hero-subtitle text-highlight" style={{ fontSize: '1.25rem' }}>
