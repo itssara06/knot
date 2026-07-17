@@ -155,7 +155,8 @@ h1, h2, h3, h4, h5, h6 {
   top: -200px;
   left: 50%;
   transform: translateX(-50%);
-  width: 1000px;
+  width: 100%;
+  max-width: 1000px;
   height: 500px;
   background: radial-gradient(ellipse at top, rgba(166, 193, 238, 0.15) 0%, rgba(251, 194, 235, 0.05) 40%, transparent 70%);
   z-index: -1;

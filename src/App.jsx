@@ -202,7 +202,7 @@ function App() {
   ];
 
   return (
-    <>
+    <div style={{ overflowX: 'hidden', width: '100%', position: 'relative' }}>
       <div className="bg-grid"></div>
       <div className="glow-top"></div>
 
@@ -623,7 +623,7 @@ function App() {
           />
         </div>
       </footer>
-    </>
+    </div>
   );
 }
 
