@@ -132,6 +132,12 @@ h1, h2, h3, h4, h5, h6 {
   z-index: -1;
   pointer-events: none;
   filter: blur(60px);
+  animation: pulse-ambient 8s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-ambient {
+  0% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+  100% { transform: translateX(-50%) scale(1.1); opacity: 1; }
 }
 
 /* Buttons */
@@ -156,6 +162,12 @@ h1, h2, h3, h4, h5, h6 {
   height: 48px;
   padding: 0 24px;
   font-size: 15px;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
 }
 
 .btn-primary {
@@ -210,8 +222,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary:hover {
-  box-shadow: 0 12px 40px rgba(166, 193, 238, 0.5);
-  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(166, 193, 238, 0.6);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.group:hover .arrow-icon {
+  transform: translateX(4px);
 }
 
 .btn-secondary {
@@ -284,32 +300,39 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 8px;
   padding: 6px 14px;
-  background: linear-gradient(180deg, var(--glow-medium), var(--glow-subtle));
-  border: 1px solid var(--glass-border-hover);
+  background: var(--bg-color);
   border-radius: 999px;
   font-size: 13px;
   color: var(--text-primary);
   margin-bottom: 24px;
   position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 12px var(--shadow-base), inset 0 1px 0 var(--glass-border-hover);
+  z-index: 1;
+  box-shadow: 0 4px 12px var(--shadow-base);
 }
 
 .hero-badge::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  animation: shine 3s infinite;
+  inset: -1px;
+  border-radius: 999px;
+  padding: 1px;
+  background: conic-gradient(from var(--border-angle), rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.1) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+  animation: rotateBadgeBorder 4s linear infinite;
 }
 
-@keyframes shine {
-  0% { left: -100%; }
-  20% { left: 100%; }
-  100% { left: 100%; }
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+
+@keyframes rotateBadgeBorder {
+  to { --border-angle: 1turn; }
 }
 
 .badge-dot {
@@ -318,6 +341,12 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--text-primary);
   border-radius: 50%;
   box-shadow: 0 0 10px 2px var(--glow-medium);
+  animation: pulse-dot 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-dot {
+  from { opacity: 0.5; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1.1); }
 }
 
 .hero-title {
@@ -986,51 +1015,92 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 768px) {
+  /* Navigation */
   .nav-links { display: none; }
-  .hero { padding: 80px 0 20px; }
-  .hero-title { font-size: 2rem; }
-  .hero-subtitle { font-size: 0.95rem; padding: 0 8px; }
-  .hero-visual { margin-top: 32px; padding: 0 12px; }
   
+  /* Layout Paddings */
+  .hero { padding: 60px 0 20px; }
+  .features { padding: 40px 0; }
+  .cta-section { padding: 40px 0; }
+  
+  /* Typography Scaling */
+  .hero-title { font-size: 2.25rem; line-height: 1.15; }
+  .hero-subtitle { font-size: 1.05rem; padding: 0 16px; margin: 16px auto; }
+  .section-title { font-size: 2rem; }
+  
+  /* Hero CTA Stacking */
+  .hero-cta { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 16px; 
+    padding: 0 24px; 
+  }
+  .hero-cta .btn {
+    width: 100%;
+    min-height: 52px;
+    font-size: 16px;
+  }
+  
+  /* Images and Visuals */
+  .hero-visual { margin-top: 32px; padding: 0 16px; }
   .app-mockup { border-radius: 8px; }
+  
+  /* Tabs Scroll */
   .app-tabs { 
     overflow-x: auto; 
     white-space: nowrap; 
     scrollbar-width: none; 
     -ms-overflow-style: none;
+    padding-bottom: 8px;
   }
   .app-tabs::-webkit-scrollbar { display: none; }
   
-  .post { padding: 16px; }
-  .post-media { height: 160px; }
-  .post-actions { gap: 16px; }
+  /* Posts & Cards */
+  .post { padding: 16px; margin: 0 8px; }
+  .post-media { height: 180px; }
   
-  .scrolling-marquee { margin-top: 40px; margin-bottom: 40px; }
-  .scrolling-marquee::before, .scrolling-marquee::after { width: 60px; }
-  .marquee-content { gap: 16px; }
-  .marquee-pill { padding: 10px 20px; font-size: 12px; }
+  /* Bento Grid Stack */
+  .bento-grid { grid-template-columns: 1fr; gap: 16px; padding: 0 16px; }
+  .bento-item.span-2, .bento-item.span-3 { grid-column: span 1; }
+  .bento-item { padding: 24px; }
   
-  .flex-row { flex-direction: column; text-align: center; gap: 40px; }
+  /* Flex Rows */
+  .flex-row { flex-direction: column; text-align: center; gap: 32px; padding: 0 16px; }
   .manifesto-visual { justify-content: center; width: 100%; margin-top: 0; }
   
-  /* Comparison Mobile Tweaks */
+  /* Scrolling Marquee */
+  .scrolling-marquee { margin: 40px 0; }
+  .scrolling-marquee::before, .scrolling-marquee::after { width: 40px; }
+  .marquee-pill { padding: 12px 20px; font-size: 13px; }
+  
+  /* Comparison Table tweaks */
   .compare-row { padding: 12px 16px; gap: 12px; }
   .compare-icon { width: 32px; height: 32px; }
   .compare-title { font-size: 14px; }
   .compare-desc { font-size: 12px; }
+
+  /* Waitlist Form Adjustments */
+  .waitlist-card { padding: 24px 16px; margin: 0 16px; border-radius: 12px; }
   
-  .features { padding: 60px 0; }
-  .bento-grid { grid-template-columns: 1fr; gap: 16px; }
-  .bento-item.span-2 { grid-column: span 1; }
-  .bento-item { padding: 24px; }
-  .bento-icon { width: 40px; height: 40px; }
-  .bento-icon-wrapper { margin-bottom: 16px; }
+  /* Form touch targets & zoom prevention */
+  .waitlist-form input, 
+  .custom-select-trigger, 
+  .industry-select {
+    font-size: 16px !important;
+    min-height: 52px !important;
+  }
   
-  .cta-section { padding: 60px 0; }
-  .waitlist-card { padding: 24px 16px; }
-  /* Ensure 16px font size so iOS Safari doesn't auto-zoom */
-  .waitlist-form input, .custom-select-trigger { font-size: 16px; height: 54px; }
+  .custom-select-option {
+    padding: 16px !important;
+    font-size: 16px !important;
+  }
   
+  /* Footer */
   .footer-top { flex-direction: column; gap: 24px; text-align: center; }
   .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+}
+
+@media (hover: none) {
+  .btn-secondary:hover { background: var(--glass-bg); transform: none; }
+  .bento-item:hover { transform: none; box-shadow: 0 1px 3px var(--shadow-base), inset 0 1px 0 var(--glass-border); }
 }

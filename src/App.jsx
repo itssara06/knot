@@ -4,7 +4,7 @@ import {
   Layout, Box, Building2, Wrench, PenTool, Scissors, Sofa, MousePointer2,
   Video, Type, Award, Package, Gamepad2, Glasses, Car, HeartHandshake,
   Cuboid, Brush, Palette, Briefcase, Zap, X, Check,
-  MessageSquare, Users, Activity, User, Sun, Moon
+  MessageSquare, Users, Activity, User, Sun, Moon, ArrowRight
 } from 'lucide-react';
 
 function App() {
@@ -23,9 +23,26 @@ function App() {
     const saved = localStorage.getItem('knot_waitlist_count');
     return saved ? parseInt(saved, 10) : 264;
   });
+  const [displayCount, setDisplayCount] = useState(0);
 
   useEffect(() => {
     localStorage.setItem('knot_waitlist_count', waitlistCount.toString());
+  }, [waitlistCount]);
+
+  useEffect(() => {
+    let startTimestamp = null;
+    const duration = 1500;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const easeProgress = 1 - Math.pow(1 - progress, 4);
+      setDisplayCount(Math.floor(easeProgress * waitlistCount));
+      
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
   }, [waitlistCount]);
 
   const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxsCMoc5oeFVo3w27iUB0OggkWNoI9SwZ3S2f1AerK88S_a0K-bFO0hZSEy0dGetHDr5A/exec';
@@ -213,20 +230,22 @@ function App() {
               <span className="badge-dot"></span>
               Private Beta
             </motion.div>
-            <motion.h1 variants={fadeUp} className="hero-title">
-              See how great designers think.<br/>
-              <span className="text-glow">Not just what they ship.</span>
+            <motion.h1 className="hero-title" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <motion.span variants={fadeUp}>See how great designers think.</motion.span>
+              <motion.span variants={fadeUp} className="text-glow">Not just what they ship.</motion.span>
             </motion.h1>
             <motion.p variants={fadeUp} className="hero-subtitle">
               A network for designers to share ideas, seek feedback, and document their creative journey in public.
             </motion.p>
-            <motion.div variants={fadeUp} className="hero-cta" style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
-              <a href="#waitlist" className="btn btn-primary btn-lg">Join the Waitlist</a>
-              <a href="#manifesto" className="btn btn-secondary btn-lg" style={{ background: 'var(--glass-bg)', border: '1px solid var(--glass-border-hover)', color: 'var(--text-primary)', textDecoration: 'none', padding: '0 24px', display: 'inline-flex', alignItems: 'center', borderRadius: '8px', fontWeight: 500 }}>See the Conversation</a>
+            <motion.div variants={fadeUp} className="hero-cta">
+              <a href="#waitlist" className="btn btn-primary btn-lg group">
+                Join the Waitlist
+                <ArrowRight size={18} className="arrow-icon" style={{ marginLeft: '8px', transition: 'transform 0.3s ease' }} />
+              </a>
             </motion.div>
             <motion.div variants={fadeUp} className="waitlist-meta" style={{ marginTop: '32px' }}>
               <span className="status-dot"></span>
-              {waitlistCount.toLocaleString()} designers on waitlist
+              {displayCount.toLocaleString()} designers on waitlist
             </motion.div>
           </motion.div>
 
