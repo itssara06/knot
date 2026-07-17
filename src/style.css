@@ -1129,7 +1129,7 @@ h1, h2, h3, h4, h5, h6 {
   .features, .manifesto, .testimonials, .cta-section { padding: 32px 0; }
   
   /* Navigation */
-  .nav-links, .nav-actions { display: none; }
+  .nav-links { display: none; }
   
   /* Hero & Headings */
   .hero-cta { flex-direction: column; width: 100%; gap: 12px; }
