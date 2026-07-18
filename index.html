@@ -2,61 +2,128 @@
 <html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     
     <!-- Primary Meta Tags -->
-    <title>DesignVerse | The Social Network for Design Thinkers</title>
-    <meta name="title" content="DesignVerse | The Social Network for Design Thinkers" />
-    <meta name="description" content="Move beyond portfolios. Discover what top UI/UX, Product, and Architecture designers are thinking, debating, and exploring in real-time." />
-    <meta name="keywords" content="design network, UI/UX social platform, product design community, architecture design network, designverse, design process sharing, design critique" />
-    <meta name="author" content="DesignVerse Inc." />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://designverse.app/" />
+    <title>Knot | The Social Network for Design Thinkers</title>
+    <meta name="title" content="Knot | The Social Network for Design Thinkers" />
+    <meta name="description" content="Move beyond portfolios with Knot. A social network for UI/UX, Product, and Architecture designers to share work-in-progress, design discussions, and critiques." />
+    <meta name="keywords" content="design community, designer social network, design discussions, design critique, work in progress, creative community, architecture community, design inspiration, design thinking, product design community, UX discussions, design process, creative collaboration, designer network, design feedback" />
+    <meta name="author" content="Knot" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="theme-color" content="#0a0a0b" />
+    
+    <link rel="canonical" href="https://knot.design/" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://designverse.app/" />
-    <meta property="og:title" content="DesignVerse | The Social Network for Design Thinkers" />
-    <meta property="og:description" content="Move beyond portfolios. Discover what top UI/UX, Product, and Architecture designers are thinking, debating, and exploring in real-time." />
-    <meta property="og:image" content="https://designverse.app/og-image.jpg" />
+    <meta property="og:url" content="https://knot.design/" />
+    <meta property="og:site_name" content="Knot" />
+    <meta property="og:title" content="Knot | The Social Network for Design Thinkers" />
+    <meta property="og:description" content="A social network for UI/UX, Product, and Architecture designers to share work-in-progress, design discussions, and critiques." />
+    <meta property="og:image" content="https://knot.design/og-image.jpg" />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://designverse.app/" />
-    <meta property="twitter:title" content="DesignVerse | The Social Network for Design Thinkers" />
-    <meta property="twitter:description" content="Move beyond portfolios. Discover what top UI/UX, Product, and Architecture designers are thinking, debating, and exploring in real-time." />
-    <meta property="twitter:image" content="https://designverse.app/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="knot.design" />
+    <meta property="twitter:url" content="https://knot.design/" />
+    <meta name="twitter:title" content="Knot | The Social Network for Design Thinkers" />
+    <meta name="twitter:description" content="A social network for UI/UX, Product, and Architecture designers to share work-in-progress, design discussions, and critiques." />
+    <meta name="twitter:image" content="https://knot.design/og-image.jpg" />
 
-    <!-- Schema.org JSON-LD -->
+    <!-- Schema.org JSON-LD - WebSite & SearchAction -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "DesignVerse",
-      "url": "https://designverse.app/",
+      "name": "Knot",
+      "url": "https://knot.design/",
+      "description": "A social network for designers to share ideas, work-in-progress, critiques, and creative thinking.",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://designverse.app/search?q={search_term_string}",
+        "target": "https://knot.design/search?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     }
     </script>
+
+    <!-- Schema.org JSON-LD - Organization & SoftwareApplication -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "DesignVerse",
-      "url": "https://designverse.app",
-      "logo": "https://designverse.app/logo.png",
+      "@type": ["Organization", "SoftwareApplication"],
+      "name": "Knot",
+      "url": "https://knot.design",
+      "logo": "https://knot.design/logo.png",
+      "applicationCategory": "SocialNetworkingApplication",
+      "operatingSystem": "All",
       "sameAs": [
-        "https://twitter.com/designverse"
+        "https://twitter.com/knotdesign"
       ]
     }
     </script>
 
+    <!-- Schema.org JSON-LD - FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "What is Knot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Knot is a social network for designers to share ideas, work-in-progress, critiques, design discussions, and creative thinking."
+        }
+      }, {
+        "@type": "Question",
+        "name": "How is Knot different from Behance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "While Behance is primarily for polished, final portfolios, Knot focuses on the messy middle—the design process, work-in-progress, critiques, and intellectual design discussions."
+        }
+      }, {
+        "@type": "Question",
+        "name": "How is Knot different from LinkedIn?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "LinkedIn is a general professional network. Knot is tailor-made for creative professionals, with specialized tools for visual feedback, design critiques, and industry-specific discussions."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Who is Knot for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Knot is built for UI/UX Designers, Product Designers, Architects, Industrial Designers, Graphic Designers, Interior Designers, Motion Designers, Fashion Designers, and Design Students."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Is Knot free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Knot offers a free tier for all designers to join the community, share their work, and participate in discussions."
+        }
+      }, {
+        "@type": "Question",
+        "name": "When will Knot launch?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We are currently in private beta. Join the waitlist today to get early access when we open up."
+        }
+      }]
+    }
+    </script>
+
+    <!-- Preconnect to Google Fonts for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
   </head>
   <body>
     <div id="root"></div>

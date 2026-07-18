@@ -212,36 +212,29 @@ function App() {
       <div className="glow-top"></div>
 
       {/* Navigation */}
+      <header>
       <motion.nav 
         className="navbar"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
+        aria-label="Main Navigation"
       >
         <div className="nav-container">
-          <a href="#" className="logo">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 22h20L12 2z"/></svg>
-            DesignVerse
+          <a href="#" className="logo" aria-label="Go to homepage">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 22h20L12 2z"/></svg>
+            Knot
           </a>
           <div className="nav-links">
-            <a href="#features">Features</a>
-            <a href="#manifesto">Manifesto</a>
+            <a href="#features" aria-label="Features">Features</a>
+            <a href="#manifesto" aria-label="Manifesto">Manifesto</a>
           </div>
           <div className="nav-actions">
-            {/* 
-            <button 
-              onClick={toggleTheme} 
-              className="btn btn-secondary btn-sm" 
-              style={{ width: '32px', padding: 0, borderRadius: '50%', background: 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', border: '1px solid var(--border-color)' }}
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
-            </button> 
-            */}
-            <a href="#waitlist" className="btn btn-primary btn-sm" onClick={(e) => { e.preventDefault(); setIsWaitlistModalOpen(true); }}>Join Waitlist</a>
+            <a href="#waitlist" className="btn btn-primary btn-sm" aria-label="Join Waitlist" onClick={(e) => { e.preventDefault(); setIsWaitlistModalOpen(true); }}>Join Waitlist</a>
           </div>
         </div>
       </motion.nav>
+      </header>
 
       <main>
         {/* Hero Section */}
@@ -399,7 +392,7 @@ function App() {
                   <div className="glow-effect"></div>
                   <div className="compare-icon highlight"><Zap size={18} /></div>
                   <div className="compare-body">
-                    <span className="compare-title highlight-text">DesignVerse</span>
+                    <span className="compare-title highlight-text">Knot</span>
                     <span className="compare-desc text-white">Discuss ideas before they become products</span>
                   </div>
                   <div className="compare-status highlight"><Check size={18} /></div>
@@ -541,6 +534,7 @@ function App() {
                     <form className="waitlist-form" onSubmit={handleWaitlistSubmit}>
                       <input 
                         type="email" 
+                        aria-label="Email Address"
                         placeholder="Email Address" 
                         required 
                         value={email}
@@ -604,15 +598,55 @@ function App() {
         )}
       </AnimatePresence>
 
+      {/* FAQ Section */}
+      <motion.section 
+        id="faq" 
+        className="faq"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={staggerContainer}
+      >
+        <div className="container" style={{ maxWidth: '800px', margin: '0 auto', paddingBottom: '60px' }}>
+          <motion.h2 variants={fadeUp} className="section-title text-center mb-12">Frequently Asked Questions</motion.h2>
+          <div className="faq-grid" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <motion.article variants={fadeUp} className="bento-item flex-col" style={{ alignItems: 'flex-start' }}>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>What is Knot?</h3>
+              <p className="text-muted" style={{ lineHeight: 1.6 }}>Knot is a social network for designers to share ideas, work-in-progress, critiques, design discussions, and creative thinking.</p>
+            </motion.article>
+            <motion.article variants={fadeUp} className="bento-item flex-col" style={{ alignItems: 'flex-start' }}>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>How is Knot different from Behance?</h3>
+              <p className="text-muted" style={{ lineHeight: 1.6 }}>While Behance is primarily for polished, final portfolios, Knot focuses on the messy middle—the design process, work-in-progress, critiques, and intellectual design discussions.</p>
+            </motion.article>
+            <motion.article variants={fadeUp} className="bento-item flex-col" style={{ alignItems: 'flex-start' }}>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>How is Knot different from LinkedIn?</h3>
+              <p className="text-muted" style={{ lineHeight: 1.6 }}>LinkedIn is a general professional network. Knot is tailor-made for creative professionals, with specialized tools for visual feedback, design critiques, and industry-specific discussions.</p>
+            </motion.article>
+            <motion.article variants={fadeUp} className="bento-item flex-col" style={{ alignItems: 'flex-start' }}>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Who is Knot for?</h3>
+              <p className="text-muted" style={{ lineHeight: 1.6 }}>Knot is built for UI/UX Designers, Product Designers, Architects, Industrial Designers, Graphic Designers, Interior Designers, Motion Designers, Fashion Designers, and Design Students.</p>
+            </motion.article>
+            <motion.article variants={fadeUp} className="bento-item flex-col" style={{ alignItems: 'flex-start' }}>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Is Knot free?</h3>
+              <p className="text-muted" style={{ lineHeight: 1.6 }}>Yes, Knot offers a free tier for all designers to join the community, share their work, and participate in discussions.</p>
+            </motion.article>
+            <motion.article variants={fadeUp} className="bento-item flex-col" style={{ alignItems: 'flex-start' }}>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>When will Knot launch?</h3>
+              <p className="text-muted" style={{ lineHeight: 1.6 }}>We are currently in private beta. Join the waitlist today to get early access when we open up.</p>
+            </motion.article>
+          </div>
+        </div>
+      </motion.section>
+
       {/* Mobile Footer */}
       <footer className="mobile-footer">
         <div className="mobile-footer-brand">
-          <h2>designVerse</h2>
+          <h2>Knot</h2>
           <p>Where creative ideas connect</p>
         </div>
         
         <div className="mobile-footer-copy">
-          © {new Date().getFullYear()} designVerse
+          © {new Date().getFullYear()} Knot
         </div>
       </footer>
 
@@ -620,7 +654,7 @@ function App() {
       <footer className="desktop-footer relative w-full h-[100vh] min-h-[600px] flex-col justify-center items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <CosmicParallaxBg 
-            head="designVerse" 
+            head="Knot" 
             text="Where creative ideas connect" 
             loop={true}
           />
