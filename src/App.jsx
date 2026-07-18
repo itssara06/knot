@@ -223,7 +223,7 @@ function App() {
         <div className="nav-container">
           <a href="#" className="logo" aria-label="Go to homepage">
             <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 22h20L12 2z"/></svg>
-            Knot
+            Resonance
           </a>
           <div className="nav-links">
             <a href="#features" aria-label="Features">Features</a>
@@ -392,7 +392,7 @@ function App() {
                   <div className="glow-effect"></div>
                   <div className="compare-icon highlight"><Zap size={18} /></div>
                   <div className="compare-body">
-                    <span className="compare-title highlight-text">Knot</span>
+                    <span className="compare-title highlight-text">Resonance</span>
                     <span className="compare-desc text-white">Discuss ideas before they become products</span>
                   </div>
                   <div className="compare-status highlight"><Check size={18} /></div>
@@ -528,7 +528,7 @@ function App() {
                         <Check size={24} />
                       </div>
                       <h3 className="font-semibold mb-2" style={{ fontSize: '1.25rem' }}>You're on the list.</h3>
-                      <p className="text-muted">We'll notify you when Knot launches.</p>
+                      <p className="text-muted">We'll notify you when Resonance launches.</p>
                     </div>
                   ) : (
                     <form className="waitlist-form" onSubmit={handleWaitlistSubmit}>
@@ -611,27 +611,27 @@ function App() {
           <motion.h2 variants={fadeUp} className="section-title text-center mb-12">Frequently Asked Questions</motion.h2>
           <div className="faq-grid" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <motion.article variants={fadeUp} className="bento-item flex-col" style={{ alignItems: 'flex-start' }}>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>What is Knot?</h3>
-              <p className="text-muted" style={{ lineHeight: 1.6 }}>Knot is a social network for designers to share ideas, work-in-progress, critiques, design discussions, and creative thinking.</p>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>What is Resonance?</h3>
+              <p className="text-muted" style={{ lineHeight: 1.6 }}>Resonance is a social network for designers to share ideas, work-in-progress, critiques, design discussions, and creative thinking.</p>
             </motion.article>
             <motion.article variants={fadeUp} className="bento-item flex-col" style={{ alignItems: 'flex-start' }}>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>How is Knot different from Behance?</h3>
-              <p className="text-muted" style={{ lineHeight: 1.6 }}>While Behance is primarily for polished, final portfolios, Knot focuses on the messy middle—the design process, work-in-progress, critiques, and intellectual design discussions.</p>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>How is Resonance different from Behance?</h3>
+              <p className="text-muted" style={{ lineHeight: 1.6 }}>While Behance is primarily for polished, final portfolios, Resonance focuses on the messy middle—the design process, work-in-progress, critiques, and intellectual design discussions.</p>
             </motion.article>
             <motion.article variants={fadeUp} className="bento-item flex-col" style={{ alignItems: 'flex-start' }}>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>How is Knot different from LinkedIn?</h3>
-              <p className="text-muted" style={{ lineHeight: 1.6 }}>LinkedIn is a general professional network. Knot is tailor-made for creative professionals, with specialized tools for visual feedback, design critiques, and industry-specific discussions.</p>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>How is Resonance different from LinkedIn?</h3>
+              <p className="text-muted" style={{ lineHeight: 1.6 }}>LinkedIn is a general professional network. Resonance is tailor-made for creative professionals, with specialized tools for visual feedback, design critiques, and industry-specific discussions.</p>
             </motion.article>
             <motion.article variants={fadeUp} className="bento-item flex-col" style={{ alignItems: 'flex-start' }}>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Who is Knot for?</h3>
-              <p className="text-muted" style={{ lineHeight: 1.6 }}>Knot is built for UI/UX Designers, Product Designers, Architects, Industrial Designers, Graphic Designers, Interior Designers, Motion Designers, Fashion Designers, and Design Students.</p>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Who is Resonance for?</h3>
+              <p className="text-muted" style={{ lineHeight: 1.6 }}>Resonance is built for UI/UX Designers, Product Designers, Architects, Industrial Designers, Graphic Designers, Interior Designers, Motion Designers, Fashion Designers, and Design Students.</p>
             </motion.article>
             <motion.article variants={fadeUp} className="bento-item flex-col" style={{ alignItems: 'flex-start' }}>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Is Knot free?</h3>
-              <p className="text-muted" style={{ lineHeight: 1.6 }}>Yes, Knot offers a free tier for all designers to join the community, share their work, and participate in discussions.</p>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Is Resonance free?</h3>
+              <p className="text-muted" style={{ lineHeight: 1.6 }}>Yes, Resonance offers a free tier for all designers to join the community, share their work, and participate in discussions.</p>
             </motion.article>
             <motion.article variants={fadeUp} className="bento-item flex-col" style={{ alignItems: 'flex-start' }}>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>When will Knot launch?</h3>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>When will Resonance launch?</h3>
               <p className="text-muted" style={{ lineHeight: 1.6 }}>We are currently in private beta. Join the waitlist today to get early access when we open up.</p>
             </motion.article>
           </div>
@@ -641,12 +641,12 @@ function App() {
       {/* Mobile Footer */}
       <footer className="mobile-footer">
         <div className="mobile-footer-brand">
-          <h2>Knot</h2>
+          <h2>Resonance</h2>
           <p>Where creative ideas connect</p>
         </div>
         
         <div className="mobile-footer-copy">
-          © {new Date().getFullYear()} Knot
+          © {new Date().getFullYear()} Resonance
         </div>
       </footer>
 
@@ -654,7 +654,7 @@ function App() {
       <footer className="desktop-footer relative w-full h-[100vh] min-h-[600px] flex-col justify-center items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <CosmicParallaxBg 
-            head="Knot" 
+            head="Resonance" 
             text="Where creative ideas connect" 
             loop={true}
           />

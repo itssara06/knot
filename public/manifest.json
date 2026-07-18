@@ -1,7 +1,7 @@
 {
-  "name": "Knot | The Social Network for Design Thinkers",
-  "short_name": "Knot",
-  "description": "Move beyond portfolios with Knot. A social network for UI/UX, Product, and Architecture designers.",
+  "name": "Resonance | The Social Network for Design Thinkers",
+  "short_name": "Resonance",
+  "description": "Move beyond portfolios with Resonance. A social network for UI/UX, Product, and Architecture designers.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0b",
