@@ -212,7 +212,7 @@ function App() {
       <div className="glow-top"></div>
 
       {/* Navigation */}
-      <header>
+      <header style={{ position: 'sticky', top: 0, zIndex: 100, width: '100%' }}>
       <motion.nav 
         className="navbar"
         initial={{ y: -20, opacity: 0 }}
