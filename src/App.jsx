@@ -19,9 +19,32 @@ function App() {
   const [submitStatus, setSubmitStatus] = useState('idle'); // idle, loading, success, error
   const [waitlistCount, setWaitlistCount] = useState(() => {
     const saved = localStorage.getItem('knot_waitlist_count');
+    // Using 264 as a base number plus any local increments if it hasn't loaded yet
     return saved ? parseInt(saved, 10) : 264;
   });
   const [displayCount, setDisplayCount] = useState(0);
+
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxsCMoc5oeFVo3w27iUB0OggkWNoI9SwZ3S2f1AerK88S_a0K-bFO0hZSEy0dGetHDr5A/exec';
+
+  useEffect(() => {
+    const fetchWaitlistCount = async () => {
+      try {
+        const response = await fetch(GOOGLE_SCRIPT_URL);
+        const data = await response.json();
+        if (typeof data.count === 'number') {
+          // We add 264 here assuming it's your baseline waitlist amount before the sheet was created.
+          // Feel free to remove "+ 264" if the sheet contains all your users!
+          const realCount = data.count + 264;
+          setWaitlistCount(realCount);
+          localStorage.setItem('knot_waitlist_count', realCount.toString());
+        }
+      } catch (error) {
+        console.error('Error fetching waitlist count:', error);
+      }
+    };
+    
+    fetchWaitlistCount();
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('knot_waitlist_count', waitlistCount.toString());
@@ -42,8 +65,6 @@ function App() {
     };
     window.requestAnimationFrame(step);
   }, [waitlistCount]);
-
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxsCMoc5oeFVo3w27iUB0OggkWNoI9SwZ3S2f1AerK88S_a0K-bFO0hZSEy0dGetHDr5A/exec';
 
   const handleWaitlistSubmit = async (e) => {
     e.preventDefault();
