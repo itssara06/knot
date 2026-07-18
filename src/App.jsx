@@ -467,19 +467,19 @@ function App() {
             <motion.h2 variants={fadeUp} className="section-title text-center mb-12">Why Designers Are Joining</motion.h2>
             <div className="bento-grid">
               <motion.div variants={fadeUp} className="bento-item flex-col">
-                <p className="font-italic mb-6" style={{ flexGrow: 1, fontSize: '1.1rem', lineHeight: 1.6 }}>"I learn more from unfinished work than polished portfolios."</p>
+                <p className="font-italic mb-6 text-highlight" style={{ flexGrow: 1, fontSize: '1.15rem', lineHeight: 1.6, fontWeight: 500 }}>"I learn more from unfinished work than polished portfolios."</p>
                 <div className="text-muted flex-row gap-2">
                    — Product Designer
                 </div>
               </motion.div>
               <motion.div variants={fadeUp} className="bento-item flex-col">
-                <p className="font-italic mb-6" style={{ flexGrow: 1, fontSize: '1.1rem', lineHeight: 1.6 }}>"I want to see how people arrive at decisions, not just the final screen."</p>
+                <p className="font-italic mb-6 text-highlight" style={{ flexGrow: 1, fontSize: '1.15rem', lineHeight: 1.6, fontWeight: 500 }}>"I want to see how people arrive at decisions, not just the final screen."</p>
                 <div className="text-muted flex-row gap-2">
                    — UX Designer
                 </div>
               </motion.div>
               <motion.div variants={fadeUp} className="bento-item flex-col">
-                <p className="font-italic mb-6" style={{ flexGrow: 1, fontSize: '1.1rem', lineHeight: 1.6 }}>"Finally a place for design discussions instead of self-promotion."</p>
+                <p className="font-italic mb-6 text-highlight" style={{ flexGrow: 1, fontSize: '1.15rem', lineHeight: 1.6, fontWeight: 500 }}>"Finally a place for design discussions instead of self-promotion."</p>
                 <div className="text-muted flex-row gap-2">
                    — Architect
                 </div>
